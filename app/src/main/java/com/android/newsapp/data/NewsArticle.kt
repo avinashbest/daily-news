@@ -3,7 +3,6 @@ package com.android.newsapp.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
 @Entity(tableName = "news_articles")
 data class NewsArticle(
     val title: String?,
