@@ -8,8 +8,10 @@ import com.android.newsapp.databinding.ActivityMainBinding
 import com.android.newsapp.features.bookmarks.BookmarksFragment
 import com.android.newsapp.features.breakingnews.BreakingNewsFragment
 import com.android.newsapp.features.searchnews.SearchNewsFragment
+import dagger.hilt.android.AndroidEntryPoint
 import java.lang.IllegalArgumentException
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
