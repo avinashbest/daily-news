@@ -17,6 +17,7 @@ data class BreakingNews(
     val articleUrl: String,
     @PrimaryKey(autoGenerate = true) val id: Int = 0
 )
+
 @Entity(tableName = "search_results", primaryKeys = ["searchQuery", "articleUrl"])
 data class SearchResult(
     val searchQuery: String,
