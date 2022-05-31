@@ -7,7 +7,9 @@ import com.android.newsapp.databinding.ItemNewsArticleBinding
 import com.bumptech.glide.Glide
 
 class NewsArticleViewHolder(
-    private val binding: ItemNewsArticleBinding
+    private val binding: ItemNewsArticleBinding,
+    private val onItemClick: (Int) -> Unit,
+    private val onBookmarkClick: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(article: NewsArticle) {
@@ -28,5 +30,23 @@ class NewsArticleViewHolder(
         }
     }
 
-
+    /**
+     * Click Listener on News Items
+     * */
+    init {
+        binding.apply {
+            root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onItemClick(position)
+                }
+            }
+            imageViewBookmark.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    onBookmarkClick(position)
+                }
+            }
+        }
+    }
 }

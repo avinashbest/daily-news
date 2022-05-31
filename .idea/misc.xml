@@ -9,11 +9,13 @@
         <entry key="app/src/main/res/drawable/ic_bookmarks.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/ic_breaking.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.191" />
+        <entry key="app/src/main/res/drawable/selectable_item_effect.xml" value="0.1895" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30925925925925923" />
         <entry key="app/src/main/res/layout/fragment_bookmarks.xml" value="0.30925925925925923" />
         <entry key="app/src/main/res/layout/fragment_breaking_news.xml" value="0.23981481481481481" />
         <entry key="app/src/main/res/layout/fragment_search_news.xml" value="0.325" />
         <entry key="app/src/main/res/layout/item_news_article.xml" value="0.3037037037037037" />
+        <entry key="app/src/main/res/menu/menu_bookmarks.xml" value="0.30648148148148147" />
         <entry key="app/src/main/res/menu/menu_bottom_nav.xml" value="0.30925925925925923" />
         <entry key="app/src/main/res/menu/menu_breaking_news.xml" value="0.30648148148148147" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.191" />

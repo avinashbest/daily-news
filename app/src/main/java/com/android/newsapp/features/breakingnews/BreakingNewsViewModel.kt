@@ -2,6 +2,7 @@ package com.android.newsapp.features.breakingnews
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.newsapp.data.NewsArticle
 import com.android.newsapp.data.NewsRepository
 import com.android.newsapp.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -60,6 +61,14 @@ class BreakingNewsViewModel @Inject constructor(
             viewModelScope.launch {
                 refreshTriggerChannel.send(Refresh.FORCE)
             }
+        }
+    }
+
+    fun onBookmarkClick(article: NewsArticle) {
+        val currentlyBookmarked = article.isBookmarked
+        val updatedArticle = article.copy(isBookmarked = !currentlyBookmarked)
+        viewModelScope.launch {
+            repository.updateArticle(updatedArticle)
         }
     }
 
