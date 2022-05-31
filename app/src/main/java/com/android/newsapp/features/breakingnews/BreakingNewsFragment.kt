@@ -15,7 +15,7 @@ import com.android.newsapp.databinding.FragmentBreakingNewsBinding
 import com.android.newsapp.shared.NewsArticleListAdapter
 import com.android.newsapp.util.Resource
 import com.android.newsapp.util.exhaustive
-import com.android.newsapp.util.showSnakbar
+import com.android.newsapp.util.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,7 +69,7 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                 viewModel.events.collect { event ->
                     when (event) {
-                        is BreakingNewsViewModel.Event.ShowErrorMessage -> showSnakbar(
+                        is BreakingNewsViewModel.Event.ShowErrorMessage -> showSnackbar(
                             getString(
                                 R.string.could_not_refresh,
                                 event.error.localizedMessage
