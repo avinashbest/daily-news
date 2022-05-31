@@ -1,6 +1,9 @@
 package com.android.newsapp.features.breakingnews
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -11,6 +14,8 @@ import com.android.newsapp.R
 import com.android.newsapp.databinding.FragmentBreakingNewsBinding
 import com.android.newsapp.shared.NewsArticleListAdapter
 import com.android.newsapp.util.Resource
+import com.android.newsapp.util.exhaustive
+import com.android.newsapp.util.showSnakbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,9 +49,57 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
                             result.error?.localizedMessage ?: R.string.unknown_error_occurred
                         )
 
-                    newsArticleAdapter.submitList(result.data)
+                    newsArticleAdapter.submitList(result.data) {
+                        if (viewModel.pendingScrollToTopAfterRefresh) {
+                            recyclerView.scrollToPosition(0)
+                            viewModel.pendingScrollToTopAfterRefresh = false
+                        }
+                    }
+                }
+            }
+
+            swipeRefreshLayout.setOnRefreshListener {
+                viewModel.onManualRefresh()
+            }
+
+            buttonRetry.setOnClickListener {
+                viewModel.onManualRefresh()
+            }
+
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.events.collect { event ->
+                    when (event) {
+                        is BreakingNewsViewModel.Event.ShowErrorMessage -> showSnakbar(
+                            getString(
+                                R.string.could_not_refresh,
+                                event.error.localizedMessage
+                                    ?: getString(R.string.unknown_error_occurred)
+                            )
+                        )
+                    }.exhaustive
                 }
             }
         }
+        setHasOptionsMenu(true)
     }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.onStart()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_breaking_news, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) =
+        when (item.itemId) {
+            R.id.action_refresh -> {
+                viewModel.onManualRefresh()
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
 }
