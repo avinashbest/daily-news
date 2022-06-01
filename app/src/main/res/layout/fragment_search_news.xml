@@ -39,7 +39,7 @@
                 tools:visibility="visible" />
 
             <TextView
-                android:id="@+id/text_view_no_error"
+                android:id="@+id/text_view_no_results"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
