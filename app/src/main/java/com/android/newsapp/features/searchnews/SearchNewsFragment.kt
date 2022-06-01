@@ -1,7 +1,6 @@
 package com.android.newsapp.features.searchnews
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -16,6 +15,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.newsapp.MainActivity
 import com.android.newsapp.R
+import com.android.newsapp.WebViewActivity
 import com.android.newsapp.databinding.FragmentSearchNewsBinding
 import com.android.newsapp.util.onQueryTextSubmit
 import com.android.newsapp.util.showIfOrInvisible
@@ -40,8 +40,10 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news),
 
         newsArticleAdapter = NewsArticlePagingAdapter(
             onItemClick = { article ->
-                val uri = Uri.parse(article.url)
-                val intent = Intent(Intent.ACTION_VIEW, uri)
+                val intent = Intent(requireContext(), WebViewActivity::class.java).putExtra(
+                    "url",
+                    article.url
+                )
                 requireActivity().startActivity(intent)
             },
             onBookmarkClick = { article ->

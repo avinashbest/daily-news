@@ -1,7 +1,6 @@
 package com.android.newsapp.features.breakingnews
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
@@ -15,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.newsapp.MainActivity
 import com.android.newsapp.R
+import com.android.newsapp.WebViewActivity
 import com.android.newsapp.databinding.FragmentBreakingNewsBinding
 import com.android.newsapp.shared.NewsArticleListAdapter
 import com.android.newsapp.util.Resource
@@ -36,8 +36,10 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news),
 
         val newsArticleAdapter = NewsArticleListAdapter(
             onItemClick = { article ->
-                val uri = Uri.parse(article.url)
-                val intent = Intent(Intent.ACTION_VIEW, uri)
+                val intent = Intent(requireContext(), WebViewActivity::class.java).putExtra(
+                    "url",
+                    article.url
+                )
                 requireActivity().startActivity(intent)
             },
             onBookmarkClick = { article ->
