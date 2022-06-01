@@ -1,11 +1,11 @@
 # Daily News:
 
 <p float="left">
-  <img src="img/1.png" width="130" />
-  <img src="img/2.png" width="130" /> 
-  <img src="img/3.png" width="130" /> 
-  <img src="img/4.png" width="130" /> 
-  <img src="img/5.png" width="130" /> 
+  <img src="img/1.png" width="135" />
+  <img src="img/2.png" width="135" /> 
+  <img src="img/3.png" width="135" /> 
+  <img src="img/4.png" width="135" /> 
+  <img src="img/5.png" width="135" /> 
 </p>
 
 - Build app using Google's best practices and recommended architecture for building robust, high-quality apps.
