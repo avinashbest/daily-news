@@ -15,7 +15,8 @@ private const val NEWS_STARTING_PAGE_INDEX = 1
 class SearchNewsRemoteMediator(
     private val searchQuery: String,
     private val newApi: NewsApi,
-    private val newsArticleDb: NewsArticleDatabase
+    private val newsArticleDb: NewsArticleDatabase,
+    private val refreshOnInit: Boolean
 ) : RemoteMediator<Int, NewsArticle>() {
 
     private val newsArticleDao = newsArticleDb.newsArticleDao()
@@ -75,6 +76,14 @@ class SearchNewsRemoteMediator(
             return MediatorResult.Error(ex)
         } catch (ex: HttpException) {
             return MediatorResult.Error(ex)
+        }
+    }
+
+    override suspend fun initialize(): InitializeAction {
+        return if (refreshOnInit) {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        } else {
+            InitializeAction.SKIP_INITIAL_REFRESH
         }
     }
 }

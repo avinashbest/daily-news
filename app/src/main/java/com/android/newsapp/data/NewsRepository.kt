@@ -80,10 +80,10 @@ class NewsRepository @Inject constructor(
             }
         )
 
-    fun getSearchResultPaged(query: String): Flow<PagingData<NewsArticle>> =
+    fun getSearchResultPaged(query: String, refreshOnInit: Boolean): Flow<PagingData<NewsArticle>> =
         Pager(
             config = PagingConfig(pageSize = 20, maxSize = 200),
-            remoteMediator = SearchNewsRemoteMediator(query, newsApi, newsArticleDb),
+            remoteMediator = SearchNewsRemoteMediator(query, newsApi, newsArticleDb, refreshOnInit),
             pagingSourceFactory = { newsArticleDao.getSearchResultArticlesPaged(query) }
         ).flow
 

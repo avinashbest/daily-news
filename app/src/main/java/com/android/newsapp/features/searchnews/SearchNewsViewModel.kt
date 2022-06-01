@@ -1,12 +1,13 @@
 package com.android.newsapp.features.searchnews
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.android.newsapp.data.NewsArticle
 import com.android.newsapp.data.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
@@ -15,15 +16,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchNewsViewModel @Inject constructor(
-    private val repository: NewsRepository
+    private val repository: NewsRepository,
+    state: SavedStateHandle
 ) : ViewModel() {
-    private val currentQuery = MutableStateFlow<String?>(null)
+    private val currentQuery = state.getLiveData<String?>("currentQuery", null)
 
-    val hasCurrentQuery = currentQuery.map { it != null }
+    private var refreshOnInit = false
 
-    val searchResult = currentQuery.flatMapLatest { query ->
+    val hasCurrentQuery = currentQuery.asFlow().map { it != null }
+
+    val searchResult = currentQuery.asFlow().flatMapLatest { query ->
         query?.let {
-            repository.getSearchResultPaged(query)
+            repository.getSearchResultPaged(query, refreshOnInit)
         } ?: emptyFlow()
     }.cachedIn(viewModelScope)
 
@@ -33,6 +37,7 @@ class SearchNewsViewModel @Inject constructor(
     var pendingScrollToTopAfterNewQuery = false
 
     fun onSearchQuerySubmit(queryString: String) {
+        refreshOnInit = true
         currentQuery.value = queryString
         newQueryInProgress = true
         pendingScrollToTopAfterNewQuery = true
