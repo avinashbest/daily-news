@@ -5,7 +5,6 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
 import com.android.newsapp.api.NewsApi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.first
 import retrofit2.HttpException
 import java.io.IOException
@@ -34,7 +33,6 @@ class SearchNewsRemoteMediator(
 
         try {
             val response = newApi.searchNews(searchQuery, page, state.config.pageSize)
-            delay(3000)
             val serverSearchResult = response.articles
 
             val bookmarkedArticles = newsArticleDao.getAllBookmarkedArticles().first()

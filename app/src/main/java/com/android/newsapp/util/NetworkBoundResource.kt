@@ -1,6 +1,5 @@
 package com.android.newsapp.util
 
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.first
@@ -21,7 +20,6 @@ inline fun <ResultType, RequestType> networkBoundResource(
             query().collect { send(Resource.Loading(it)) }
         }
         try {
-            delay(2000)
             onFetchSuccess()
             saveFetchResult(fetch())
             loading.cancel()
