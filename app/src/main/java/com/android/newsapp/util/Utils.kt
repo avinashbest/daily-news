@@ -13,7 +13,16 @@ fun Fragment.showSnackbar(
     Snackbar.make(view, message, duration).show()
 }
 
-// Extension function for search view query listener
+// Extension function for search fragment recyclerView
+inline fun <T : View> T.showIfOrInvisible(condition: (View) -> Boolean) {
+    if (condition(this)) {
+        this.visibility = View.VISIBLE
+    } else {
+        this.visibility = View.INVISIBLE
+    }
+}
+
+// Extension function for search fragment query listener
 inline fun SearchView.onQueryTextSubmit(crossinline listener: (String) -> Unit) {
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {

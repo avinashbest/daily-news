@@ -1,15 +1,14 @@
 package com.android.newsapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.android.newsapp.databinding.ActivityMainBinding
 import com.android.newsapp.features.bookmarks.BookmarksFragment
 import com.android.newsapp.features.breakingnews.BreakingNewsFragment
 import com.android.newsapp.features.searchnews.SearchNewsFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.IllegalArgumentException
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -89,9 +88,18 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_bookmark -> bookmarksFragment
                 else -> throw IllegalArgumentException("Unexpected itemId")
             }
-            selectFragment(fragment)
+            if (selectedFragment === fragment) { // three equals means -> comparing references
+                fragment.onBottomNavigationFragmentReselected()
+            } else {
+                selectFragment(fragment)
+            }
             true
         }
+    }
+
+    interface OnBottomNavigationFragmentReselectedListener {
+        fun onBottomNavigationFragmentReselected()
+
     }
 
     override fun onBackPressed() {

@@ -12,19 +12,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.newsapp.MainActivity
 import com.android.newsapp.R
 import com.android.newsapp.databinding.FragmentBookmarksBinding
 import com.android.newsapp.shared.NewsArticleListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BookmarksFragment : Fragment(R.layout.fragment_bookmarks) {
+class BookmarksFragment : Fragment(R.layout.fragment_bookmarks),
+    MainActivity.OnBottomNavigationFragmentReselectedListener {
     private val viewModel: BookmarksViewModel by viewModels()
+
+    private var currentBinding: FragmentBookmarksBinding? = null
+    private val binding get() = currentBinding!!
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentBookmarksBinding.bind(view)
+        currentBinding = FragmentBookmarksBinding.bind(view)
 
         val bookmarksAdapter = NewsArticleListAdapter(
             onItemClick = { article ->
@@ -71,5 +76,15 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks) {
                 super.onOptionsItemSelected(item)
             }
         }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.recyclerView.adapter = null // avoid memory leak
+        currentBinding = null // avoid memory leak
+    }
+
+    override fun onBottomNavigationFragmentReselected() {
+        binding.recyclerView.scrollToPosition(0)
+    }
 
 }
