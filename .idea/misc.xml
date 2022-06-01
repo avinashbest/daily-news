@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/background_gradient_splash_screen.xml" value="0.1895" />
         <entry key="app/src/main/res/drawable/gradients.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/ic_bookmark_selected.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/ic_bookmark_unselected.xml" value="0.191" />
@@ -10,7 +11,9 @@
         <entry key="app/src/main/res/drawable/ic_breaking.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.191" />
         <entry key="app/src/main/res/drawable/selectable_item_effect.xml" value="0.1895" />
+        <entry key="app/src/main/res/drawable/splash_background.xml" value="0.1895" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.30648148148148147" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.30648148148148147" />
         <entry key="app/src/main/res/layout/fragment_bookmarks.xml" value="0.30925925925925923" />
         <entry key="app/src/main/res/layout/fragment_breaking_news.xml" value="0.23981481481481481" />
         <entry key="app/src/main/res/layout/fragment_search_news.xml" value="0.325" />

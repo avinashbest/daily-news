@@ -6,7 +6,12 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/secondary_light</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >?attr/colorPrimary</item>
+        <item name="android:statusBarColor">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.SplashScreen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/primary_light</item>
+        <item name="android:windowBackground">@color/primary_light</item>
     </style>
 </resources>
