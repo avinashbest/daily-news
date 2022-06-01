@@ -173,6 +173,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news),
         inflater.inflate(R.menu.menu_search_news, menu)
         val searchItem = menu.findItem(R.id.action_search)
         val searchView = searchItem?.actionView as SearchView
+        searchView.queryHint = getString(R.string.search_query_hint)
 
         searchView.onQueryTextSubmit { query ->
             viewModel.onSearchQuerySubmit(query)
