@@ -168,7 +168,66 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news),
                 newsArticleAdapter.retry()
             }
         }
+        categoriesNewsQuerySearchListeners()
         setHasOptionsMenu(true)
+    }
+
+    private fun categoriesNewsQuerySearchListeners() {
+        binding.apply {
+            queryTechnology.setOnClickListener {
+                viewModel.onSearchQuerySubmit(queryTechnology.text.toString())
+                resetChipChecked()
+                queryTechnology.isChecked = true
+            }
+
+            queryIndia.setOnClickListener {
+                viewModel.onSearchQuerySubmit(queryIndia.text.toString())
+                resetChipChecked()
+                queryIndia.isChecked = true
+            }
+
+            querySports.setOnClickListener {
+                viewModel.onSearchQuerySubmit(querySports.text.toString())
+                resetChipChecked()
+                querySports.isChecked = true
+            }
+
+            queryBusiness.setOnClickListener {
+                viewModel.onSearchQuerySubmit(queryBusiness.text.toString())
+                resetChipChecked()
+                queryBusiness.isChecked = true
+            }
+
+            queryEntertainment.setOnClickListener {
+                viewModel.onSearchQuerySubmit(queryEntertainment.text.toString())
+                resetChipChecked()
+                queryEntertainment.isChecked = true
+            }
+
+            queryScience.setOnClickListener {
+                viewModel.onSearchQuerySubmit(queryScience.text.toString())
+                resetChipChecked()
+                queryScience.isChecked = true
+            }
+
+            queryHealth.setOnClickListener {
+                viewModel.onSearchQuerySubmit(queryHealth.text.toString())
+                resetChipChecked()
+                queryHealth.isChecked = true
+            }
+        }
+    }
+
+    private fun resetChipChecked() {
+        binding.apply {
+            queryTechnology.isChecked = false
+            queryIndia.isChecked = false
+            querySports.isChecked = false
+            queryBusiness.isChecked = false
+            queryEntertainment.isChecked = false
+            queryScience.isChecked = false
+            queryHealth.isChecked = false
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
